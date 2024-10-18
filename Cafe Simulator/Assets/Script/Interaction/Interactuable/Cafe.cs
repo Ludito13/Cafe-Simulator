@@ -7,14 +7,61 @@ public class Cafe : ItemsToInteract
     #region Variables
 
     #region Publics
-    [SerializeField] public float maxCoffee;
+    public float maxCoffee;
     #endregion
 
     #region Privates
-    [HideInInspector] public float _coffeCount;
+     public float _coffeCount;
+
+    public bool _isFull { get;  set; }
+    private bool _startToFull;
+    private string _typeOfFull;
     #endregion
 
     #endregion
+
+    public void Start()
+    {
+        GameManager.instance.refiel += Complete;
+    }
+
+    private void Update()
+    {
+        if(_startToFull) _coffeCount = Mathf.Clamp(_coffeCount += Time.deltaTime, 0f, maxCoffee);
+
+
+        switch (_typeOfFull)
+        {
+            case "Full":
+                if (_coffeCount >= maxCoffee)
+                {
+                    _isFull = true;
+                    _startToFull = false;
+                }
+                break;
+
+            case "Mid":
+
+                if (_coffeCount >= maxCoffee * .5f)
+                {
+                    _isFull = true;
+                    _startToFull = false;
+                }
+                break;
+
+            case "Small":
+
+                if (_coffeCount >= maxCoffee * .25f)
+                {
+                    _isFull = true;
+                    _startToFull = false;
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
 
     public override void OnEnter()
     {
@@ -37,8 +84,10 @@ public class Cafe : ItemsToInteract
         GameManager.instance.itemHand = transform;
     }
 
-    public void Complete()
+    public void Complete(string typeOfRefield)
     {
-        _coffeCount += Mathf.Clamp(_coffeCount += Time.deltaTime, 0f, maxCoffee);
+        _startToFull = true;
+        _typeOfFull = typeOfRefield;
+
     }
 }

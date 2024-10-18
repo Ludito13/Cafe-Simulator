@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 using System.Linq;
 
@@ -18,6 +19,7 @@ public class CoffeeMachine : ItemsToInteract
     #endregion
 
     #region Private
+    private bool _start;
     private int _index;
     private Transform _cup;
     private Transform[] _allCups;
@@ -40,12 +42,11 @@ public class CoffeeMachine : ItemsToInteract
             {
                 if(_allCups[i] != null)
                 {
-                    _allCups[i].gameObject.GetComponent<Cafe>().Complete();
-
-                    if(_allCups[i].gameObject.GetComponent<Cafe>()._coffeCount >= _allCups[i].gameObject.GetComponent<Cafe>().maxCoffee)
+                    if(_allCups[i].gameObject.GetComponent<Cafe>()._isFull)
                     {
                         _allCups[i].SetParent(completeSpace[J]);
                         _allCups[i].position = completeSpace[J].position;
+                        _allCups[i] = null;
                     }
                 }
             }
@@ -86,6 +87,8 @@ public class CoffeeMachine : ItemsToInteract
 
                 _allCups[i].SetParent(allSpaces[i]);
                 _allCups[i].position = allSpaces[i].position;
+
+                GameManager.instance.OnCoffee();
             }
             //else if(allSpaces[i].childCount > 0 && GameManager.instance.itemHand != null)
             //{

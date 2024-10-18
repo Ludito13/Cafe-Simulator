@@ -10,9 +10,6 @@ public class UIManager : MonoBehaviour
 
     #region Variables
 
-    public delegate void FullCoffee();
-    public FullCoffee fullCoffe;
-
     #region Publics
 
     #endregion
@@ -26,15 +23,11 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
+
     }
 
-    void Start()
+    public void FullCupOfCoffe()
     {
-        
-    }
 
-    void Update()
-    {
-        
     }
 }

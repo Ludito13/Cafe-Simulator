@@ -41,7 +41,7 @@ public class Interact : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    _interactItem.TakeItem(_hit.transform);
+                    if(_hit.transform != null) _interactItem.TakeItem(_hit.transform);
                 }
             }
         }

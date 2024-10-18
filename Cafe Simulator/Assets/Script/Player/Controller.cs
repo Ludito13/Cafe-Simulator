@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Controller 
 {
+    public delegate void MovementD();
+    private MovementD mov;
+
     private Player _player;
     private Model _model;
 
@@ -11,16 +15,24 @@ public class Controller
     {
         _player = p;
         _model = m;
+
+        mov = Movement;
+
+        GameManager.instance.moveOn += MoveOn;
+        GameManager.instance.moveOff += MoveOff;
+
+        GameManager.instance.OffCoffee += MoveOn;
+        GameManager.instance.OnCoffee += MoveOff;
     }
 
     public void ArtificialUpdate()
     {
-
+        //mov();
     }
 
     public void ArtificialFixedUpdate()
     {
-        Movement();
+        mov();
     }
 
     public void ArtificialLateUpdate()
@@ -29,6 +41,16 @@ public class Controller
     }
 
     #region Movement
+
+    public void MoveOn()
+    {
+        mov = Movement;
+    }
+
+    public void MoveOff()
+    {
+        mov = delegate { };
+    }
 
     public void Movement()
     {

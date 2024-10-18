@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerCamera : MonoBehaviour
 {
     #region Variables
+
+    public delegate void Move();
+    Move _movement;
 
     #region Publics
     [SerializeField] Transform orientation;
@@ -25,9 +29,45 @@ public class PlayerCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+
+        _movement = RotateCamera;
+
+        GameManager.instance.moveOff += CameraOff;
+        GameManager.instance.moveOn += CameraOn;
+
+        GameManager.instance.OnCoffee += CameraOff;
+        GameManager.instance.OffCoffee += CameraOn;
+
+        GameManager.instance.OnCoffee += ShowCamera;
+        GameManager.instance.OffCoffee += NoShowCamera;
+    }
+
+    void ShowCamera()
+    {
+        Cursor.visible = true;
+    }
+
+    void NoShowCamera()
+    { 
+        Cursor.visible = false;
     }
 
     void Update()
+    {
+        _movement();
+    }
+
+    void CameraOn()
+    {
+        _movement = RotateCamera;
+    }
+
+    void CameraOff()
+    {
+        _movement = delegate { };
+    }
+
+    void RotateCamera()
     {
         float mouseX = Input.GetAxis("Mouse X") * sensibilty;
         float mouseY = Input.GetAxis("Mouse Y") * sensibilty;
