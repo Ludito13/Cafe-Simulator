@@ -18,6 +18,7 @@ public class ItemsToInteract : MonoBehaviour, IInteract
     public virtual void OnEnter()
     {
         Debug.Log("Interactuo");
+        //GameManager.instance.interaction = TakeItem;
     }
 
     public virtual void OnExit()

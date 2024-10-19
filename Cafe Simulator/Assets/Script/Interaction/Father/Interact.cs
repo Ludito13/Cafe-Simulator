@@ -39,9 +39,15 @@ public class Interact : MonoBehaviour
                 _interactItem = _hit.transform.gameObject.GetComponent<IInteract>();
                 _interactItem.OnEnter();
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (_interactItem == null || _hit.transform == null) return;
+
+                //if (_hit.transform == null) return;
+
+                //GameManager.instance.interaction(_interactItem, _hit.transform);
+
+                if (Input.GetKeyDown(KeyCode.Mouse0) && _hit.transform != null)
                 {
-                    if(_hit.transform != null) _interactItem.TakeItem(_hit.transform);
+                     _interactItem.TakeItem(_hit.transform);
                 }
             }
         }

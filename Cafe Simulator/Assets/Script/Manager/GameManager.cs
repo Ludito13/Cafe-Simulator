@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     #region Variables
+    public delegate void InteractEvent(IInteract i, Transform t);
+    public InteractEvent interaction;
+
     public delegate void RefielCoffe(string c);
     public RefielCoffe refiel;
 
@@ -40,4 +43,25 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
     }
 
+    /// <summary>
+    /// This function change the player hand´s item position and set a new parent. 
+    /// When the variable itemHand is null it will full the space, on the other side when its full it will turn it to null.
+    /// </summary>
+    /// <param name="condition"></param>
+    /// <returns></returns>
+    public void ChangeItemHandFather(Transform t)
+    {
+        if(itemHand == null)
+        {
+            itemHand = t;
+            itemHand.SetParent(itemFather);
+            itemHand.localPosition = Vector3.zero;
+        }
+        else
+        {
+            itemHand.SetParent(t);
+            itemHand.localPosition = Vector3.zero;
+            itemHand = null;
+        }
+    }
 }

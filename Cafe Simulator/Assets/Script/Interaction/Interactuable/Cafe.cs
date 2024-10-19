@@ -79,15 +79,19 @@ public class Cafe : ItemsToInteract
 
         if (GameManager.instance.itemHand != null) return;
 
-        transform.SetParent(GameManager.instance.itemFather);
-        transform.position = GameManager.instance.itemFather.position;
-        GameManager.instance.itemHand = transform;
+        GameManager.instance.refiel += Complete;
+
+        //transform.SetParent(GameManager.instance.itemFather);
+        //transform.position = GameManager.instance.itemFather.position;
+        //GameManager.instance.itemHand = transform;
+
+        GameManager.instance.ChangeItemHandFather(transform);
     }
 
     public void Complete(string typeOfRefield)
     {
         _startToFull = true;
         _typeOfFull = typeOfRefield;
-
+        GameManager.instance.refiel -= Complete;
     }
 }

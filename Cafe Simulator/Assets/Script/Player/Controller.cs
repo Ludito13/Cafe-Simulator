@@ -58,5 +58,10 @@ public class Controller
 
         _model.RotationPlayer();
     }
+
+    public void Interact()
+    {
+
+    }
     #endregion
 }

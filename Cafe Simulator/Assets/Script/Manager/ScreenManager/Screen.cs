@@ -13,8 +13,8 @@ public class Screen : MonoBehaviour, IScreen
     {
         //button.onClick.AddListener(() => BTN_Active());
 
-        GameManager.instance.OnCoffee += BTN_Active;
-        GameManager.instance.OffCoffee += BTN_Desactive;
+        //GameManager.instance.OnCoffee += BTN_Active;
+        //GameManager.instance.OffCoffee += BTN_Desactive;
     }
 
     public void BTN_Active()
@@ -27,7 +27,8 @@ public class Screen : MonoBehaviour, IScreen
 
     public void BTN_Desactive()
     {
-        ScreenManager.instance.Pop();
+        Desactivate(); 
+        //ScreenManager.instance.Pop();
     }
 
     public void Activate()

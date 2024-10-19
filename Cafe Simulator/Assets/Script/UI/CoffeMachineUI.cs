@@ -23,6 +23,7 @@ public class CoffeMachineUI : MonoBehaviour
 
     #region Publics
     [SerializeField] Buttons[] allButtons;
+    [SerializeField] Canvas options;
     #endregion
 
     #region Private
@@ -42,6 +43,21 @@ public class CoffeMachineUI : MonoBehaviour
         _allButtons[AllButtons.FullCoffee].onClick.AddListener(() => SelectCoffe("Full"));
         _allButtons[AllButtons.MidCoffee].onClick.AddListener(() => SelectCoffe("Mid"));
         _allButtons[AllButtons.SmallCoffe].onClick.AddListener(() => SelectCoffe("Small"));
+
+        GameManager.instance.OnCoffee += Active;
+        GameManager.instance.OffCoffee += Desactive;
+
+        Desactive();
+    }
+
+    public void Active()
+    {
+        options.transform.gameObject.SetActive(true);
+    }
+
+    public void Desactive()
+    {
+        options.transform.gameObject.SetActive(false);
     }
 
     void Update()

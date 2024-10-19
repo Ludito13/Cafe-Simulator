@@ -36,17 +36,17 @@ public class CoffeeMachine : ItemsToInteract
 
     private void Update()
     {
-        for (int i = 0; i < _allCups.Length; i++)
+        for (int y = 0; y < _allCups.Length; y++)
         {
             for (int J = 0; J < completeSpace.Length; J++)
             {
-                if(_allCups[i] != null)
+                if (_allCups[J] != null)
                 {
-                    if(_allCups[i].gameObject.GetComponent<Cafe>()._isFull)
+                    if (_allCups[J].gameObject.GetComponent<Cafe>()._isFull)
                     {
-                        _allCups[i].SetParent(completeSpace[J]);
-                        _allCups[i].position = completeSpace[J].position;
-                        _allCups[i] = null;
+                        _allCups[J].SetParent(completeSpace[J]);
+                        _allCups[J].position = completeSpace[J].position;
+                        _allCups[J] = null;
                     }
                 }
             }
@@ -82,43 +82,17 @@ public class CoffeeMachine : ItemsToInteract
             if(allSpaces[i].childCount <= 0)
             {
                 Debug.Log("2");
-                _allCups[i] = GameManager.instance.itemHand;
-                GameManager.instance.itemHand = null;
+                //_allCups[i] = GameManager.instance.itemHand;
+                //GameManager.instance.itemHand = null;
 
-                _allCups[i].SetParent(allSpaces[i]);
-                _allCups[i].position = allSpaces[i].position;
+                //_allCups[i].SetParent(allSpaces[i]);
+                //_allCups[i].position = allSpaces[i].position;
+
+                GameManager.instance.ChangeItemHandFather(_allCups[i]);
 
                 GameManager.instance.OnCoffee();
             }
-            //else if(allSpaces[i].childCount > 0 && GameManager.instance.itemHand != null)
-            //{
-            //    Debug.Log("3");
-            //    _allCups[i].SetParent(GameManager.instance.itemFather);
-            //    _allCups[i].transform.position = Vector3.zero;
-            //    GameManager.instance.itemHand = _cup;
-            //    _allCups[i] = null;
-            //}
-        }
-        
-        //if (allSpaces[_index].childCount <= 0)
-        //{
-        //    _cup = GameManager.instance.itemHand;
-        //    GameManager.instance.itemHand = null;
-
-        //    _cup.SetParent(allSpaces[_index]);
-        //    _cup.position = allSpaces[_index].position;
-
-        //    _index += Mathf.Clamp(_index++, 0, allSpaces.Length);
-        //}
-        //else if(allSpaces.Where(x => x.childCount > 0).FirstOrDefault().childCount > 0)
-        //{
-        //    _cup.SetParent(GameManager.instance.itemFather);
-        //    _cup.transform.position = Vector3.zero;
-        //    GameManager.instance.itemHand = _cup;
-        //    _cup = null;
-        //}
-
-        
+        }               
     }
 
     void NoCollision()
