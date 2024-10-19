@@ -12,7 +12,7 @@ public class Tray : ItemsToInteract
     #endregion
 
     #region Privates
-
+   
     #endregion
 
     #endregion
@@ -31,5 +31,9 @@ public class Tray : ItemsToInteract
     public override void TakeItem(Transform t)
     {
         base.TakeItem(t);
+
+        if (item == null) return;
+
+        
     }
 }

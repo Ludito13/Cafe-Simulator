@@ -82,13 +82,13 @@ public class CoffeeMachine : ItemsToInteract
             if(allSpaces[i].childCount <= 0)
             {
                 Debug.Log("2");
-                //_allCups[i] = GameManager.instance.itemHand;
-                //GameManager.instance.itemHand = null;
+                _allCups[i] = GameManager.instance.itemHand;
+                GameManager.instance.itemHand = null;
 
-                //_allCups[i].SetParent(allSpaces[i]);
-                //_allCups[i].position = allSpaces[i].position;
+                _allCups[i].SetParent(allSpaces[i]);
+                _allCups[i].position = allSpaces[i].position;
 
-                GameManager.instance.ChangeItemHandFather(_allCups[i]);
+                //GameManager.instance.ChangeItemHandFather(allSpaces[i]);
 
                 GameManager.instance.OnCoffee();
             }

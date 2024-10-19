@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public delegate void InteractEvent(IInteract i, Transform t);
     public InteractEvent interaction;
 
-    public delegate void RefielCoffe(string c);
+    public delegate void RefielCoffe(TypeOfCoffee c);
     public RefielCoffe refiel;
 
     public delegate void FullCoffee();
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     #region Publics
     [SerializeField] public Transform itemFather;
+    [SerializeField] public List<Node> allNodes = new List<Node>();
     #endregion
 
     #region Private
@@ -63,5 +64,37 @@ public class GameManager : MonoBehaviour
             itemHand.localPosition = Vector3.zero;
             itemHand = null;
         }
+    }
+
+    public void GiveOrderToCostumer(string order, Transform t)
+    {
+        if(itemHand != null)
+        {
+            t = itemHand;
+            itemHand = null;
+
+            if(t.GetComponent<Cafe>().coffeeName == order)
+            {
+                Debug.Log("Muchas Gracias");
+            }
+            else
+            {
+                Debug.Log("Que mal servicio");
+            }
+
+            Destroy(t.gameObject);
+        }
+        else
+        {
+            Debug.Log("Quiero perdir " + order + " por favor");
+        }
+
+    }
+
+    public T GetRandomEnumValue<T>(T[] e) where T : Enum
+    {
+        int count = UnityEngine.Random.Range(0, e.Length);
+
+        return e[count];
     }
 }

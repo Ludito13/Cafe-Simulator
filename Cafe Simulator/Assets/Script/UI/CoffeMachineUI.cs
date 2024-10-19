@@ -40,9 +40,9 @@ public class CoffeMachineUI : MonoBehaviour
             if (!_allButtons.ContainsKey(item.name)) _allButtons.Add(item.name, item.obj);
         }
 
-        _allButtons[AllButtons.FullCoffee].onClick.AddListener(() => SelectCoffe("Full"));
-        _allButtons[AllButtons.MidCoffee].onClick.AddListener(() => SelectCoffe("Mid"));
-        _allButtons[AllButtons.SmallCoffe].onClick.AddListener(() => SelectCoffe("Small"));
+        _allButtons[AllButtons.FullCoffee].onClick.AddListener(() => SelectCoffe(TypeOfCoffee.Solo));
+        _allButtons[AllButtons.MidCoffee].onClick.AddListener(() => SelectCoffe(TypeOfCoffee.Vienes));
+        _allButtons[AllButtons.SmallCoffe].onClick.AddListener(() => SelectCoffe(TypeOfCoffee.Espresso));
 
         GameManager.instance.OnCoffee += Active;
         GameManager.instance.OffCoffee += Desactive;
@@ -65,7 +65,7 @@ public class CoffeMachineUI : MonoBehaviour
         
     }
 
-    public void SelectCoffe(string typeOfCoffe)
+    public void SelectCoffe(TypeOfCoffee typeOfCoffe)
     {
         GameManager.instance.refiel(typeOfCoffe);
         GameManager.instance.OffCoffee();

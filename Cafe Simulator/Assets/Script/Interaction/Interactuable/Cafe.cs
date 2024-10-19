@@ -11,11 +11,13 @@ public class Cafe : ItemsToInteract
     #endregion
 
     #region Privates
-     public float _coffeCount;
+    public string coffeeName;
+    public float _coffeCount;
 
     public bool _isFull { get;  set; }
     private bool _startToFull;
     private string _typeOfFull;
+    private TypeOfCoffee ty;
     #endregion
 
     #endregion
@@ -30,32 +32,37 @@ public class Cafe : ItemsToInteract
         if(_startToFull) _coffeCount = Mathf.Clamp(_coffeCount += Time.deltaTime, 0f, maxCoffee);
 
 
-        switch (_typeOfFull)
+        switch (ty)
         {
-            case "Full":
+            case TypeOfCoffee.Solo:
+
                 if (_coffeCount >= maxCoffee)
                 {
                     _isFull = true;
                     _startToFull = false;
+                    coffeeName = ty.ToString();
                 }
                 break;
 
-            case "Mid":
+            case TypeOfCoffee.Vienes:
 
                 if (_coffeCount >= maxCoffee * .5f)
                 {
                     _isFull = true;
                     _startToFull = false;
+                    coffeeName = ty.ToString();
                 }
                 break;
 
-            case "Small":
+            case TypeOfCoffee.Espresso:
 
                 if (_coffeCount >= maxCoffee * .25f)
                 {
                     _isFull = true;
                     _startToFull = false;
+                    coffeeName = ty.ToString();
                 }
+
                 break;
 
             default:
@@ -88,10 +95,10 @@ public class Cafe : ItemsToInteract
         GameManager.instance.ChangeItemHandFather(transform);
     }
 
-    public void Complete(string typeOfRefield)
+    public void Complete(TypeOfCoffee typeOfRefield)
     {
         _startToFull = true;
-        _typeOfFull = typeOfRefield;
+        ty = typeOfRefield;
         GameManager.instance.refiel -= Complete;
     }
 }
